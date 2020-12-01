@@ -2,7 +2,7 @@ module.exports = (sequelize, Sequelize) => {
 	const paziente = sequelize.define("paziente", {
 		cf: {
 			type: Sequelize.STRING,
-			//primaryKey: 1
+			primaryKey: 1
 		},
 		nome: {
 			type: Sequelize.STRING,

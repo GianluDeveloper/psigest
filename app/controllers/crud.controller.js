@@ -56,10 +56,9 @@ exports.findAll = (req, res) => {
 
 // recupera uno specifico paziente
 exports.findOne = (req, res) => {
-    exports.findOne = (req, res) => {
         const cf = req.params.cf;
-      
-        PAZIENTE.findByPk(cf)
+        console.log(cf);
+        PAZIENTE.findOne({where: {cf:cf}})
           .then(data => {
             res.send(data);
           })
@@ -68,31 +67,28 @@ exports.findOne = (req, res) => {
               message: "Errore recuperando il paziente=" + cf
             });
           });
-      };
-  
 };
 
 // aggiorna il pazinete
 exports.update = (req, res) => {
-    const cf = req.params.cf;
-
+    const codf = req.params.cf;
     PAZIENTE.update(req.body, {
-      where: { cf: cf }
+      where: { cf: codf }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: `Il paziente ${nome} ${cognome} è stato aggiornato.`
+            message: `Il paziente ${req.body.nome} ${req.body.cognome} è stato aggiornato.`
           });
         } else {
           res.send({
-            message: `Il paziente ${nome} ${cognome} non è stato aggiornato. Il corpo del messaggio è vuoto oppure non è stato trovato il paziente`
+            message: `Il paziente ${req.body.nome} ${req.body.cognome} non è stato aggiornato. Il corpo del messaggio è vuoto oppure non è stato trovato il paziente`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Errore aggiornando il paziente " + cf
+          message: "Errore aggiornando il paziente " + codf
         });
       });
 };
