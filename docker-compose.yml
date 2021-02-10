@@ -8,6 +8,8 @@ services:
       - "8080:8080"
     networks:
       - linkToDb
+    depends_on:
+      - "dbMySql"
   dbMySql:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
