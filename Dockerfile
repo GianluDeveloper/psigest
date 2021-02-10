@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install
 COPY . /app
-CMD sleep 30 ; node server.js
+CMD node server.js
 EXPOSE 8080
 
 
